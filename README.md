@@ -64,3 +64,44 @@ $ scalac Test.scala
 $ scala Test
 x 的坐标点: 20
 y 的坐标点: 30
+
+# Scala 继承
+Scala继承一个基类跟Java很相似, 但我们需要注意以下几点：
+
+1、重写一个非抽象方法必须使用override修饰符。
+2、只有主构造函数才可以往基类的构造函数里写参数。
+3、在子类中重写超类的抽象方法时，你不需要使用override关键字。
+接下来让我们来看个实例：
+
+实例
+class Point(xc: Int, yc: Int) {
+   var x: Int = xc
+   var y: Int = yc
+
+   def move(dx: Int, dy: Int) {
+      x = x + dx
+      y = y + dy
+      println ("x 的坐标点: " + x);
+      println ("y 的坐标点: " + y);
+   }
+}
+
+class Location(override val xc: Int, override val yc: Int,
+   val zc :Int) extends Point(xc, yc){
+   var z: Int = zc
+
+   def move(dx: Int, dy: Int, dz: Int) {
+      x = x + dx
+      y = y + dy
+      z = z + dz
+      println ("x 的坐标点 : " + x);
+      println ("y 的坐标点 : " + y);
+      println ("z 的坐标点 : " + z);
+   }
+}
+Scala 使用 extends 关键字来继承一个类。实例中 Location 类继承了 Point 类。Point 称为父类(基类)，Location 称为子类。
+
+override val xc 为重写了父类的字段。
+
+继承会继承父类的所有属性和方法，Scala 只允许继承一个父类。
+
